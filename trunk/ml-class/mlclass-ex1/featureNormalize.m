@@ -26,12 +26,15 @@ sigma = zeros(1, size(X, 2));
 % Hint: You might find the 'mean' and 'std' functions useful.
 %       
 
+% I redefine mu and sigma so that I can avoid explicit loops
 
+mu = repmat(mean(X, 1), size(X,1), 1);
+sigma = repmat(std(X), size(X,1), 1);
 
+X_norm = (X - mu)./sigma;
 
-
-
-
+% Redefine mu and sigma for the API
+mu = mu(1,:); sigma = sigma(1,:);
 
 
 % ============================================================
