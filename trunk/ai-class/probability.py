@@ -1,6 +1,6 @@
 # Bayes rule:
 P['A | B'] = P['B | A']*P['A']/P['B']
-P['A | B'] = P['B | A']*P['A']/(P['B']*P['B|A']*P['A'] + P['B|!A']*P['!A']
+P['A | B'] = P['B | A']*P['A']/(P['B']*P['B|A']*P['A'] + P['B|!A']*P['!A'])
 
 
 # Joint Probability rule:
