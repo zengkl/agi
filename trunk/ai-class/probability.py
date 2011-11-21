@@ -1,3 +1,8 @@
+# Bayes rule:
+P['A | B'] = P['B | A']*P['A']/P['B']
+P['A | B'] = P['B | A']*P['A']/(P['B']*P['B|A']*P['A'] + P['B|!A']*P['!A']
+
+
 # Joint Probability rule:
 
 P['A | B'] = P['A,B']/P['B']
@@ -8,6 +13,9 @@ P['A,B'] = P['B,A']
 P['A,B'] = P['A | B']*P['B']
 
 P['A | B'] != P['B | A']
+
+
+P['A | B'] = P['B | A']*P['A']/P['B']
 
 # Complement
 P['!A'] = 1 - P['A']
