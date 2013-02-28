@@ -1,0 +1,185 @@
+\begin{definition}[Polyhedra]
+A set $P$ of vectors in $\R^n$ is a polyhedron if $P = \{x\in \R^n:
+Ax\leq b}$ for some matrix $A$ and some vector $b$
+\end{definition}
+
+\begin{definition}[Halfspace]
+$a^Tx\leq\beta$ 
+\end{definition}
+
+
+\begin{definition}[Hyperplane]
+$a^Tx\eq\beta$
+\end{definition}
+
+\begin{definition}[Valid]
+An inequality $a^Tx\leq\beta$ is {\em valid} for a polyhedron $P$ if each
+$x*\in P$ satisfies $a^Tx*\leq\beta$
+\end{definition}
+
+\begin{definition}[Active]
+An inequality $a^Tx\leq\beta$ is {\em active} at $x*\in\R^n$ if $a^Tx*\eq\beta$
+\end{definition}
+
+\begin{definition}[Vertex]
+A point $x*\in P$ is a {\em vertex} of $P$ if there exists an inequality
+$a^Tx\leq\beta$ such that 
+\li $a^Tx\leq\beta$ is valid for $P$ and
+\li $a^Tx\leq\beta$ is active at $x*$ and not active at any other
+point in $P$.
+
+Alternately, $x*\in P$ is a {\em vertex} $\iff \exists c\in\R^n$ such that
+$x*$ is unique optimal solution of the linear program $\max\{c^Tx:x\in P\}
+\end{definition}
+
+
+\begin{definition}[Sub-system of active inequalities]
+$P = \{x\in\R^n: Ax\leq b}, A\in\R^{m\times n}, b\in\R^m$
+For $x*\in\R^n, I = \{i: 1\leq i\leq m, a^T_ix*= b_i\}$ are {\em indices of
+inequalities active at $x*$ }
+
+Write $I=\{i_1,...,i_k\}$ with $i_1 < i_2 < \cdots < i_k$ and let $A_I
+= \left( a^T_{i_1} & \vdots a^T_{i_k} \right), b_I = \left( b^{i_1} & \vdots b_{i_k} \right)$
+$A_Ix\leq b_I$ is a {\em sub-system } of inequalities active at $x*$
+\end{definition}
+
+\begin{definition}[Basic solutions]
+Consider polyhedron $P=\{x\in\R^n: Ax\leq b\}$. A point %x*$ is a {\em
+basic solution} if $\rank(A_I) = n$.
+
+If $x*\in P$, hen $x*$ is {\em basic feasible solution}
+\end{definition}
+
+\begin{theorem}[Vertices and basic feasible solutions]
+Let $P=\{x\in\R^n:Ax\leq \}$ and $x*\in P$.  Then $x*$ is vertex of
+$P$ iff $x*$ is basic feasible solution.
+\end{theorem}
+
+$x*\in P$ vertex, assume not a basic feasible solution.
+
+$$Ax\leq = \left{  A_1x\leq b_1 \mbox{ active at $x*$}  A_1x* = b_1 \\
+	  	  A_2x\leq b_2 \mbox{ inactive at $x*$} A_2x* < b_2 \\
+		  	   
+Since $x*$ is not a basic feasible solution, the $\rank(A_1) < n \iff
+\kernel(A_1) \supsetneq \{0\}$
+
+Since $x* < b_2, \forall d\in \R^n, \exists\epsilon > 0\st A_2(x* \pm
+\epsilon \ctimes d) < b_2$
+
+Let $d \in \kernel(A_1)\backslash\{0\}$
+
+Then $A_1(x* \pm \epsilon\ctimes d) = b_1$ because $A_1(x*
+\pm\epsilon\ctimes d) = A_1x* \pm \epsilon A_1\ctimes d$
+
+We are now very close to a contradiction.
+Since $x*\in P$ is a vertex, $\exists c\in\R^n \st x*$ is a unique
+optimal solution of the LP $\max{c^Tx: x\in P}
+
+We know that $x*+\epsilon\ctimes d \in P$ and $x*-\epsilon\ctimes
+d \in P$ 
+Since $x*$ is the unique optimal solution of $\max{c^Tx: x\in P}, then
+
+$c^Tx* > c^T(x* + \epsilon\ctimes d)$
+and
+$c^Tx* > c^T(x* - \epsilon\ctimes d)$
+
+which implies that $0 > \epsilon c^T d$ and $0 < -\epsilon c^T d$
+But this is a contradiction, so therefore $x*\in P$ vertex, implies
+$x*$ is a basic feasible solution.
+
+We now show that if $x*$ is a basic feasible solution of $P$, then
+$x*$ is a vertex of $P$.
+
+$Ax\leq b$ split into 
+$A_1x\leq b_1$ active at $x*$.  This implies that $\rank(A_1) = n,$
+and $x*$ is a unique solution of $A_1x=b_1$. (because columns of A_1
+are linearly independent)
+
+
+$A_2x\leq b_2$ active at $x*$
+
+
+we need to show $\exists c^Tx\leq\delta$ valid for $P$, active at $x*$
+and inactive at any $y*\in P, y*\neq x*$  (1st definition of vertex)
+
+Since $y*\neq x*$, then $A_1y* \neq b_1$
+A_1x\leq b_1 \implies \exists j \st a^T_jy* < \beta_j
+
+c^T = (a_1^T + \cdots + a_k^T), \delta = (\beta_1 + \cdots + \beta_k)
+
+$c^Tx\leq\delta$ valid for $P$ because the inequalities are valid, so
+the sum of the inequalities is also valid.
+It is also active at $x*$ because
+$c^Tx*\eq \sum^k_{i=1} a^T_ix* = \sum_{i=1}^k\beta_i = \delta$.
+
+
+It is also inactive at any $y*\in P, y*\neq x$ becaue
+$$c^Ty* = \sum^k_{i=1}a^T_iy* = \sum^k_{i=1, i\neq j}a^T_iy* + a^T_j
+y* < \delta
+ because $a^T_j < \beta_j$.
+
+\qed
+
+
+ 
+\begin{theorem}[Optimality of vertices]
+If a linear program $\max{c^Tx: x\in\R^n, Ax\leq b} is feasible and
+bounded and if $\rank(A) = n$ then the LP has an optimal solution that
+is a vertex.
+\end{theorem}
+\begin{proof}
+$x*\in P, A_1x\in b_1$ active at $x*$
+A_2x\leq b_2$ inactive at $x*$.   
+
+$x*$ not a vetex, then $\rank(A_1) < n$
+
+Construct $$y*\in P \st 1. c^Ty*\geq c^Tx*
+	  	       2. \bar{A_1}x\leq\bar{b_1},  \rank(\bar{A_1}
+	  	       \geq \rank(A_1) + 1
+		       	   \bar{A_2}x\leq\bar{b_2}$$
+Note this process cannot be repeated more than n times.
+
+
+For any $x*\in P \exists$ vertex $z*\in P \st c^Tz*\geq c^Tx* \implies
+\max{c^Tx:x\in\R^n, Ax\leq b} exists and it is attained at a vertex.
+
+Since $\rank(A_1)< n, \exists d\in\kernel(A_1)\backslash\{0\}$ such
+that if $u$ is the hyperplane formed by $x*+\lambda d: \lambda\in\R$,
+then $A_1 u = A_1(x*+\lambda d) = b_1 + 0$
+
+Without loss of generality, let $c^Td\geq 0$ because $d\in\kernel(A_1)
+\iff -d \in \kernel(A_1)$
+There are now two cases:
+Case 1: $c^Td > 0$
+Then increasing $d$ will increase the objective until we hit a bound
+$a^Tx\leq\beta$ (since the polyhedra is bounded). We define $y*$ as
+the point where this happens.
+Then $A_1x\leq b_1$ active at $y*%
+$a^Tx\leq\beta$ active at $y*$
+$a^Tx\leq\beta$ inactive at $x*$, 
+and $c^Ty* > c^Tx*$
+and $\rank(A_1 a^T) = \rank(A_1) + 1
+
+Case 2: $c^Td = 0$
+Although every point on $u$ has the same objective value as $x*$, the
+rank of $A$ is $n$, so $Ad\neq \vec{0}$, and $\exist a^Tx\leq\beta$
+that intersects with $d$. We call this point $y*$
+Then $A_1x\leq b_1$ active at $y*%
+$a^Tx\leq\beta$ active at $y*$
+$a^Tx\leq\beta$ inactive at $x*$, 
+and $c^Ty* = c^Tx*$
+and $\rank(A_1 a^T) = \rank(A_1) + 1
+\qed
+\end{proof}
+
+This has an important consequence.
+
+$x* \mbox{is a vertex} \implies \exist B\subset \{1,...,m\} \st x*$ is
+a unique solution of $A_Bx= b_B, \|B\| = n$
+
+Important consequence is that $\max{c^Tx, Ax\leq b, x\in \R^n$ can be
+solved by enumerating all vertices and picking the best one.
+
+However there will be {m\choose{n}} of them.
+
+
