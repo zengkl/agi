@@ -1,3 +1,5 @@
+\documentclass{article}
+\begin{document}
 
 
 \begin{definition}[Polyhedra]
@@ -31,7 +33,7 @@ $a^Tx\leq\beta$ such that
 point in $P$.
 
 Alternately, $x*\in P$ is a {\em vertex} $\iff \exists c\in\R^n$ such that
-$x*$ is unique optimal solution of the linear program $\max\{c^Tx:x\in P\}
+$x*$ is unique optimal solution of the linear program $\max\{c^Tx:x\in P\}$
 \end{definition}
 
 
@@ -125,13 +127,13 @@ y* < \delta
 
  
 \begin{theorem}[Optimality of vertices]
-If a linear program $\max{c^Tx: x\in\R^n, Ax\leq b} is feasible and
+If a linear program $\max{c^Tx: x\in\R^n, Ax\leq b}$ is feasible and
 bounded and if $\rank(A) = n$ then the LP has an optimal solution that
 is a vertex.
 \end{theorem}
 \begin{proof}
 $x*\in P, A_1x\in b_1$ active at $x*$
-A_2x\leq b_2$ inactive at $x*$.   
+$A_2x\leq b_2$ inactive at $x*$.   
 
 $x*$ not a vetex, then $\rank(A_1) < n$
 
@@ -143,7 +145,7 @@ Note this process cannot be repeated more than n times.
 
 
 For any $x*\in P \exists$ vertex $z*\in P \st c^Tz*\geq c^Tx* \implies
-\max{c^Tx:x\in\R^n, Ax\leq b} exists and it is attained at a vertex.
+\max{c^Tx:x\in\R^n, Ax\leq b}$ exists and it is attained at a vertex.
 
 Since $\rank(A_1)< n, \exists d\in\kernel(A_1)\backslash\{0\}$ such
 that if $u$ is the hyperplane formed by $x*+\lambda d: \lambda\in\R$,
@@ -156,22 +158,22 @@ Case 1: $c^Td > 0$
 Then increasing $d$ will increase the objective until we hit a bound
 $a^Tx\leq\beta$ (since the polyhedra is bounded). We define $y*$ as
 the point where this happens.
-Then $A_1x\leq b_1$ active at $y*%
+Then $A_1x\leq b_1$ active at $y*$
 $a^Tx\leq\beta$ active at $y*$
 $a^Tx\leq\beta$ inactive at $x*$, 
 and $c^Ty* > c^Tx*$
-and $\rank(A_1 a^T) = \rank(A_1) + 1
+and $\rank(A_1 a^T) = \rank(A_1) + 1$
 
 `Case 2: $c^Td = 0$
 Although every point on $u$ has the same objective value as $x*$, the
 rank of $A$ is $n$, so $Ad\neq \vec{0}$, and $\exist a^Tx\leq\beta$
 that intersects with $d$. We call this point $y*$
-Then $A_1x\leq b_1$ active at $y*%
+Then $A_1x\leq b_1$ active at $y*$
 $a^Tx\leq\beta$ active at $y*$
 $a^Tx\leq\beta$ inactive at $x*$, 
 and $c^Ty* = c^Tx*$
-and $\rank(A_1 a^T) = \rank(A_1) + 1
-\qed
+and $\rank(A_1 a^T) = \rank(A_1) + 1$
+$\qed$
 \end{proof}
 
 This has an important consequence.
@@ -182,6 +184,7 @@ a unique solution of $A_Bx= b_B, \|B\| = n$
 Important consequence is that $\max{c^Tx, Ax\leq b, x\in \R^n$ can be
 solved by enumerating all vertices and picking the best one.
 
-However there will be {m\choose{n}} of them.
+However there will be ${m\choose{n}}$ of them.
 
 
+\end{document}
