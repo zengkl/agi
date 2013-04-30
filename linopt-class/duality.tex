@@ -1,0 +1,97 @@
+\documentclass{article}
+\begin{document}
+
+\begin{definition}[The dual linear program]
+Given $\max\{c^Tx: x\in \R^n, Ax\leq b\}$
+the {\em dual linear program} is
+
+$$ \min b^Ty  $$
+\begin{eqnarray*}
+A^Ty &=& c  \\
+y &\geq& 0 
+\end{eqnarray*}
+
+
+
+
+Dual formulation of 
+Quiz:
+$$\max(x_1 + 2x_2 + x_3)
+\begin{eqnarray*}
+x_1 + x_2 &\leq& 1 \\
+x_1 + x_3 &\leq& 4
+\end{eqnarray*}
+A = \left( \begin{array}{ccc}
+1 & 1 & 0 \\
+1 & 0 & 1 \\
+\end{array} \right) 
+b  =  \left( \begin{array}{c}
+    1 \\
+    4 \\ 
+\end{array} \right) 
+
+c & = & \left( \begin{array}{c}
+1 \\ 2 \\ 1 \end{array} \right) 
+$$
+
+
+Quiz Farkas.
+
+Dual of $$\max c^Tx
+Ax \leq b
+x \geq 0$$
+
+alternatively,
+
+$$\left( \begin{array}{c}
+  A \\
+  -I 
+\end{array} \right) x 
+\leq 
+\left( \begin{array}{c} 
+  b \\
+  0
+\end{array} \right)$$
+
+$$\min b^Ty_1 + 0^Ty_2 $$
+$$(A^T -I^T) \left( \begin{array}{c} y_1 \\ y_2\end{array}\right) = c $$
+$$y_1, y_2 \geq 0 $$
+
+
+$$\delta(v) = \{e \in E: v \in e\}$$
+The set $\{\chi^M:M$ matching of $G\}$ is the set of feasible solutions of:
+$$v\in V: \sum_{e\in\delta(v)}x_e\leq 1$$
+$$e\in E: x_e\in\{0,1\}$$
+
+$$\left(\begin{array}{ccc}
+1 & 0 & 1 \\
+1 & 1 & 0 \\
+0 & 1 & 1
+\end{array} \right) x \leq \left( \begin{array}{c}
+1 \\
+1 \\
+1 \end{array}\right)$$
+verses
+$$\left(\begin{array}{ccc}
+1 & 0 & 1 \\
+0 & 1 & 1 \\
+1 & 1 & 1
+\end{array} \right) x \leq \left( \begin{array}{c}
+1 \\
+1 \\
+1 \end{array}\right)$$
+
+$$x_1 + x_3 \leq 1$$
+$$x_1 + x_2 \leq 1$$
+$$x_2 + x_3 \leq 1$$
+
+verses
+
+$$x_1 + x_3 \leq 1$$
+$$x_2 + x_3 \leq 1$$
+$$x_1 + x_2 + x_3 \leq 1$$
+
+The first choice, because the first row corresponds to the constraint
+edge 1 or edge 3 is incident to vertex 1
+edge 1 or edge 2 is incident to vertex 2
+edge 2 or edge 3 is incident to vertex 3
