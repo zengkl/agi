@@ -1,0 +1,31 @@
+from gurobipy import *
+
+
+m = Model( 'Q17' )
+x1 = m.addVar( lb=0, name='x1' )
+x2 = m.addVar( lb=0, name='x2' )
+x3 = m.addVar( lb=0, name='x3' )
+m.update()
+m.addConstr( -4*x1 + -x2 + -x3 <= -10, name='y1' )
+m.addConstr( -x1 + -x2 + -4*x3 <= -60, name='y2' )
+m.addConstr( -x1 <= 0, name='y3' )
+m.addConstr( -x2 <= 0, name='y4' )
+m.addConstr( -x3 <= 0 , name='y5' )
+m.setObjective( -4*x1 - 2*x2 - 4*x3, GRB.MAXIMIZE )
+m.update()
+m.optimize()
+
+
+d = Model('Dual Q17')
+y1 = d.addVar(name = 'y1')
+y2 = d.addVar(name = 'y2')
+y3 = d.addVar(name = 'y3')
+y4 = d.addVar(name = 'y4')
+y5 = d.addVar(name = 'y5')
+d.update()
+d.addConstr( 4*y1 + y2 + y3 == 4 )
+d.addConstr( y1 + y2 + y4 == 2 )
+d.addConstr( y1 + 4*y2 + y5 == 4 )
+d.setObjective( -10*y1 -60*y2, GRB.MINIMIZE )
+d.update()
+d.optimize()
