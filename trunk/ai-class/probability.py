@@ -28,5 +28,5 @@ P['B'] = P['B | A']*P['A'] + P['B | !A']*P['!A']
 
 P['A | B'] = P['A | B,C']*P['C'] + P['A | B,!C']*P['!C']
 
-#Depends on 
+#Independence
 P['B'] _|_ P['C']
