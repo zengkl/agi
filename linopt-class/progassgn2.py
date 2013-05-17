@@ -69,7 +69,8 @@ def solve(A, b, c, B, verbose):
 		X = eye(n)
 		X[r, :] = g
 		
-		ABi = ABi*X
+		g[r] -= 1
+		ABi += ABi[:,r]*g
 
 		# move to the new vertex
 		x = x + v*d

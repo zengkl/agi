@@ -1,0 +1,2 @@
+Error occurred during initialization of VM
+Could not find agent library: libcalljvmti.jnilib (searched /usr/local/lib:/usr/local/oracle/lib:/Users/zucker/src/mosek/5/tools/platform/osx32x86/bin:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries:/System/Library/Java/Extensions:/Library/Java/Extensions:.)
