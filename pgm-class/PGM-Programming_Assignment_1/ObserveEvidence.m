@@ -24,7 +24,7 @@ for i = 1:size(E, 1),
 
     for j = 1:length(F),
 		  % Does factor contain variable?
-        indx = find(F(j).var == v);
+      indx = find(F(j).var == v);
 
         if (~isempty(indx)),
         
