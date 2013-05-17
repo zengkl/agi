@@ -27,8 +27,18 @@ end
 % Remember to renormalize the entries of M!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-M = struct('var', [], 'card', [], 'val', []); % Returns empty factor. Change this.
-
+for (i = 1:size(F,2)),
+  F(i) = ObserveEvidence(F(i),E);
+  A = IndexToAssignment( 1:length(F(i).val), F(i).card);
+  F(i) = SetValueOfAssignment(F(i), A, F(i).val/sum(F(i).val));
+  [B.var, mapB] = setdiff(F(i).var, V);
+  if ~isempty(B.var)
+    F(i) = FactorMarginalization(F(i), V );
+  end
+  
+end
+M = ComputeJointDistribution( F );
+  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 M = StandardizeFactors(M);
