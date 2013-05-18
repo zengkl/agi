@@ -27,21 +27,31 @@ end
 % Remember to renormalize the entries of M!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-for (i = 1:numel(F)),
-  F(i) = ObserveEvidence(F(i),E);
-  irrelevantVars = setdiff(F(i).var, V);
-
-  if isempty(setdiff(F(i).var, irrelevantVars))
-    F(i) = struct('var', [], 'card', [], 'val', []);
-  else
-    assignments = IndexToAssignment(1:length(F(i).val), F(i).card );
-    F(i) = SetValueOfAssignment(F(i), assignments, F(i).val/sum(F(i).val));    
-    F(i)
-
-    F(i) = FactorMarginalization(F(i), irrelevantVars );
-  end
-end
 M = ComputeJointDistribution( F );
+M = ObserveEvidence(M, E);
+irrelevantVars = setdiff(M.var, V);
+if isempty(setdiff(M.var, irrelevantVars))
+  M = struct('var', [], 'card', [], 'val', []);
+else
+  assignments = IndexToAssignment(1:length(M.val), M.card );
+  M = SetValueOfAssignment(M, assignments, M.val/sum(M.val));    
+  M = FactorMarginalization(M, irrelevantVars );
+end
+% for (i = 1:numel(F)),
+%   F(i) = ObserveEvidence(F(i),E);
+%   irrelevantVars = setdiff(F(i).var, V);
+
+%   if isempty(setdiff(F(i).var, irrelevantVars))
+%     F(i) = struct('var', [], 'card', [], 'val', []);
+%   else
+%     assignments = IndexToAssignment(1:length(F(i).val), F(i).card );
+%     F(i) = SetValueOfAssignment(F(i), assignments, F(i).val/sum(F(i).val));    
+%     F(i)
+
+%     F(i) = FactorMarginalization(F(i), irrelevantVars );
+%   end
+% end
+
   
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
