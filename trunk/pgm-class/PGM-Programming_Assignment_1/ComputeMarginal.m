@@ -27,15 +27,19 @@ end
 % Remember to renormalize the entries of M!
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-for (i = 1:size(F,2)),
+for (i = 1:numel(F)),
   F(i) = ObserveEvidence(F(i),E);
-  A = IndexToAssignment( 1:length(F(i).val), F(i).card);
-  F(i) = SetValueOfAssignment(F(i), A, F(i).val/sum(F(i).val));
-  [B.var, mapB] = setdiff(F(i).var, V);
-  if ~isempty(B.var)
-    F(i) = FactorMarginalization(F(i), V );
+  irrelevantVars = setdiff(F(i).var, V);
+
+  if isempty(setdiff(F(i).var, irrelevantVars))
+    F(i) = struct('var', [], 'card', [], 'val', []);
+  else
+    assignments = IndexToAssignment(1:length(F(i).val), F(i).card );
+    F(i) = SetValueOfAssignment(F(i), assignments, F(i).val/sum(F(i).val));    
+    F(i)
+
+    F(i) = FactorMarginalization(F(i), irrelevantVars );
   end
-  
 end
 M = ComputeJointDistribution( F );
   
