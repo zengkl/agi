@@ -1,0 +1,56 @@
+net
+{
+	propagationenginegenerator1791944048146838126L = "edu.ucla.belief.approx.BeliefPropagationSettings@1b845568";
+	huginenginegenerator3061656038650325130L = "edu.ucla.belief.inference.JoinTreeSettings@d032cf5";
+	recoveryenginegenerator6944530267470113528l = "edu.ucla.util.SettingsImpl@4b7c8f7f";
+	node_size = (130 55);
+}
+
+node Traffic
+{
+	states = ("state0" "state1" );
+	position = (152 -280);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable2";
+	label = "Traffic";
+	DSLxSUBMODEL = "Root Submodel";
+	diagnosistype = "AUXILIARY";
+}
+node President
+{
+	states = ("state0" "state1" );
+	position = (58 -137);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable0";
+	label = "President";
+	DSLxSUBMODEL = "Root Submodel";
+	diagnosistype = "AUXILIARY";
+}
+node accident
+{
+	states = ("state0" "state1" );
+	position = (279 -133);
+	excludepolicy = "include whole CPT";
+	ismapvariable = "false";
+	ID = "variable1";
+	label = "accident";
+	DSLxSUBMODEL = "Root Submodel";
+	diagnosistype = "AUXILIARY";
+}
+potential ( Traffic | President accident )
+{
+	data = (((	0.9	0.1	)
+		(	0.5	0.5	))
+		((	0.4	0.6	)
+		(	0.1	0.9	)));
+}
+potential ( President | )
+{
+	data = (	0.99	0.01	);
+}
+potential ( accident | )
+{
+	data = (	0.9	0.1	);
+}
