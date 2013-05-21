@@ -37,11 +37,29 @@ phenotypeFactor = struct('var', [], 'card', [], 'val', []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %INSERT YOUR CODE HERE
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
+% -+-----------+----------+-----------+--------------+   
+%  | Phenotype | Genotype | P(X|Dominant )  | P(XRecessive )
+% -+-----------+----------+-----------------+--------------+
+%  |     1     |    AA    |     1           |     0
+% -+-----------+----------+-----------------+--------------+
+%  |     2     |    AA    |     0           |     1
+% -+-----------+----------+-----------------+--------------+
+%  |     1     |    Aa    |     1           |     0
+% -+-----+-----+----------+-----------------+--------------+
+%  |     2     |    Aa    |     0           |     1
+% -+-----------+----------+-----------------+--------------+
+%  |     1     |    aa    |     0           |     1
+% -+-----------+----------+-----------------+--------------+
+%  |     2     |    aa    |     1           |     0
+% -+-----------+----------+-----------------+--------------+
 
 % Fill in phenotypeFactor.var.  This should be a 1-D row vector.
+%  P( phenotype|genotype )
+phenotypeFactor.var = [phenotypeVar, genotypeVar];
 % Fill in phenotypeFactor.card.  This should be a 1-D row vector.
-
-phenotypeFactor.val = zeros(1, prod(phenotypeFactor.card));
+phenotypeFactor.card = [2 3];
+phenotypeFactor.val = [isDominant, ~isDominant, isDominant, \
+			 ~isDominant, ~isDominant, isDominant];
 % Replace the zeros in phentoypeFactor.val with the correct values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
