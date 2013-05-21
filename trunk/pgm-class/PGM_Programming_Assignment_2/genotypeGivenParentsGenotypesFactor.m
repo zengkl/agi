@@ -57,9 +57,42 @@ genotypeFactor = struct('var', [], 'card', [], 'val', []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Fill in genotypeFactor.var.  This should be a 1-D row vector.
+genotypeFactor.var = [genotypeVarChild genotypeVarParentOne genotypeVarParentTwo];
 % Fill in genotypeFactor.card.  This should be a 1-D row vector.
-
+numGenotypes = nchoosek(numAlleles, 2) + numAlleles;
+genotypeFactor.card = [numGenotypes numGenotypes numGenotypes];
 genotypeFactor.val = zeros(1, prod(genotypeFactor.card));
 % Replace the zeros in genotypeFactor.val with the correct values.
-
+for (indx = 1:prod(genotypeFactor.card)),
+  assignment = IndexToAssignment(indx, genotypeFactor.card);
+  childGenotype = assignment(1);
+  parent1Genotype = assignment(2);
+  parent2Genotype = assignment(3);
+  childAlleles = genotypesToAlleles(childGenotype, :);
+  parent1Alleles = genotypesToAlleles(parent1Genotype, :);
+  parent2Alleles = genotypesToAlleles(parent2Genotype, :);
+  [inheritedAlleles1, iChild1, iParent1] = intersect(childAlleles, \
+						     parent1Alleles);
+  [inheritedAlleles2, iChild2, iParent2] = intersect(childAlleles, \
+						     parent2Alleles);
+  [sharedAlleles, iParent1, iParent2] = intersect(parent1Alleles, parent2Alleles);
+  if (setdiff(childAlleles, union(parent1Alleles, \
+					 parent2Alleles)) ||
+      isempty(inheritedAlleles1) || isempty(inheritedAlleles2))
+    genotypeFactor.val(indx) = 0;
+    
+  elseif ((parent1Alleles(1) == parent1Alleles(2)) && \
+	  (parent2Alleles(1) == parent2Alleles(2)))
+    genotypeFactor.val(indx) = 1.0;
+  elseif ((parent1Alleles(1) == parent1Alleles(2)) || \
+	  (parent2Alleles(1) == parent2Alleles(2)))
+    genotypeFactor.val(indx) = 0.5;
+  elseif ((length(sharedAlleles) == 2) && (childAlleles(1) ~= childAlleles(2)))
+    genotypeFactor.val(indx) = 0.5;
+  else
+    genotypeFactor.val(indx) = 0.25;
+  end
+end
+	   
+	
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

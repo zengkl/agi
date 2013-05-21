@@ -35,9 +35,17 @@ phenotypeFactor = struct('var', [], 'card', [], 'val', []);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%  
 
 % Fill in phenotypeFactor.var.  This should be a 1-D row vector.
+phenotypeFactor.var = [phenotypeVar genotypeVar];
 % Fill in phenotypeFactor.card.  This should be a 1-D row vector.
 
+phenotypeFactor.card = [2 length(alphaList)];
 phenotypeFactor.val = zeros(1, prod(phenotypeFactor.card));
+phenotypeFactor.val(2*(1:length(alphaList)) -1) = alphaList;
+phenotypeFactor.val(2*(1:length(alphaList))) = 1 - alphaList;
+
+
+
+					    
 % Replace the zeros in phentoypeFactor.val with the correct values.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
