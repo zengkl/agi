@@ -1,12 +1,12 @@
 <SamiamPreferences>
-	<DefaultPath>/Users/zucker/Courses/pgm-class/PGM-Programming_Assignment_1</DefaultPath>
+	<DefaultPath>/Users/zucker/Courses/pgm-class/PGM_Programming_Assignment_2</DefaultPath>
 	<FileExtension>.net</FileExtension>
 	<SecondsPerRCCall>2.018421361862025E-6</SecondsPerRCCall>
-	<RecentDocuments>/Users/zucker/Courses/pgm-class/quiz1.net;/Users/zucker/Courses/pgm-class/PGM-Programming_Assignment_1/Credit_net.net;</RecentDocuments>
+	<RecentDocuments>/Users/zucker/Courses/pgm-class/PGM-Programming_Assignment_1/Credit_net.net;/Users/zucker/Courses/pgm-class/PGM_Programming_Assignment_2/cysticFibrosisBayesNet.net;/Users/zucker/Courses/pgm-class/PGM_Programming_Assignment_2/cysticFibrosisBayesNetGeneCopy.net;/Users/zucker/Courses/pgm-class/PGM_Programming_Assignment_2/spinalMuscularAtrophyBayesNet.net;</RecentDocuments>
 	<Algorithm>null</Algorithm>
 	<PreferenceGroup name="Inference">
 		<pref class="edu.ucla.belief.ui.preference.IntegerPreference" key="inferenceMinFillRepetitions" value="7" name="Min fill, best of N repetitions" />
-		<pref class="edu.ucla.belief.ui.preference.IntegerPreference" key="inferenceMinFillSeed" value="1949557158" name="Min fill, new random seed (not saved)" />
+		<pref class="edu.ucla.belief.ui.preference.IntegerPreference" key="inferenceMinFillSeed" value="45034351" name="Min fill, new random seed (not saved)" />
 		<pref class="edu.ucla.belief.ui.preference.BooleanPreference" key="inferenceMAPExplorerFullScreenWidth" value="true" name="MAP Solution Explorer, maximize width" />
 		<pref class="edu.ucla.belief.ui.preference.BooleanPreference" key="askBeforeCPTCopy" value="true" name="Ask before modifying cpt (cpt copy tool)" />
 		<pref class="edu.ucla.belief.ui.preference.EnumPreference$Caste" key="inferenceCaste" value="retard" name="User level (cpt copy tool)" />

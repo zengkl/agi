@@ -1,2 +1,18 @@
-Error occurred during initialization of VM
-Could not find agent library: libcalljvmti.jnilib (searched /usr/local/lib:/usr/local/oracle/lib:/Users/zucker/src/mosek/5/tools/platform/osx32x86/bin:/System/Library/Java/JavaVirtualMachines/1.6.0.jdk/Contents/Libraries:/System/Library/Java/Extensions:/Library/Java/Extensions:.)
+SamIam launch command "/usr/bin/java -Xms8m -Xmx512m -classpath /Users/zucker/Courses/pgm-class/samiam/samiam.jar:/Users/zucker/Courses/pgm-class/samiam/inflib.jar edu.ucla.belief.ui.UI "
+SamIam launched by "/Users/zucker/Courses/pgm-class/samiam/runsamiam"
+2013-05-21 18:40:14.968 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-21 18:40:14.974 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-21 18:40:14.979 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-21 18:40:14.988 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-21 18:40:14.991 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:11:33.110 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:11:33.113 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:11:33.116 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:11:33.116 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:11:33.117 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:12:03.144 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:12:03.149 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:12:03.153 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:12:03.194 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:12:03.291 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)
+2013-05-22 21:12:03.307 java[30931:1f07] _NXGetScreenRect: error getting display bounds (1001)

@@ -55,7 +55,6 @@ for i = 1:numAlleles
         end
     end
 end
-
 geneCopyFactor.var = [geneCopyVarChild geneCopyVarOne geneCopyVarTwo];
 geneCopyFactor.card = ones(1, 3) * numAlleles;
 geneCopyFactor.val = alleleProbs;
