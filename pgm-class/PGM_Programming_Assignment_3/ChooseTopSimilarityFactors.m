@@ -23,7 +23,11 @@ if (length(allFactors) <= F)
 end
 
 % Your code here:
-factors = allFactors; %%% REMOVE THIS LINE
+for (indx = 1:length(allFactors))
+    A(indx, :) = [indx allFactors(indx).val(1)];
+end
+topFactorIndices = sortrows(A,-2)(1:F, 1);
+factors = allFactors(topFactorIndices);
 
 end
 
