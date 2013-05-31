@@ -37,24 +37,33 @@ MESSAGES = repmat(struct('var', [], 'card', [], 'val', []), N, N);
 %
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [i,j] = GetNextCliques(P, MESSAGES);
-
 while (i  && j )
-  delta = P.cliqueList(i);
-  for (k = setdiff(find(P.edges(i,:) == 1), [j]))
-    delta = FactorProduct(delta, MESSAGES(k,i) );
+    delta = P.cliqueList(i);
+    if isMax
+       delta.val = log(delta.val);
+    end
+    for (k = setdiff(find(P.edges(i,:) == 1), [j]))
+      if isMax
+	 delta = FactorSum(delta, MESSAGES(k,i));
+      else
+	delta = FactorProduct(delta, MESSAGES(k,i) );
+      end
+    end
+    % Note: Compute the FactorMarginalization AFTER
+    % FactorProduct. I have screwed this up twice now.
+    sepset_vars = intersect(P.cliqueList(i).var, P.cliqueList(j).var);
+    marginal_vars = setdiff( delta.var, sepset_vars );
+    if isMax
+      delta = FactorMaxMarginalization( delta, marginal_vars );
+    else
+      delta = FactorMarginalization( delta, marginal_vars );
+      delta.val = delta.val ./ sum(delta.val);
+    end
+    MESSAGES(i,j) = delta;
+    %P.cliqueList(i).var
+    %P.cliqueList(j).var
+    [i,j] = GetNextCliques(P, MESSAGES);
   end
-  % Note: Compute the FactorMarginalization AFTER
-  % FactorProduct. I have screwed this up twice now.
-  sepset_vars = intersect(P.cliqueList(i).var, P.cliqueList(j).var);
-  marginal_vars = setdiff( delta.var, sepset_vars );
-  delta = FactorMarginalization( delta, marginal_vars );
-  delta.val = delta.val ./ sum(delta.val);
-  MESSAGES(i,j) = delta;
-  %P.cliqueList(i).var
-  %P.cliqueList(j).var
-  [i,j] = GetNextCliques(P, MESSAGES);
-  
-end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % YOUR CODE HERE
@@ -63,9 +72,16 @@ end
 % Compute the final potentials for the cliques and place them in P.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 for (i = 1:N)
-  belief = P.cliqueList(i);
+      belief = P.cliqueList(i);
+      if isMax
+	 belief.val = log(belief.val);
+      end
   for (k = find(P.edges(i,:) == 1))
-    belief = FactorProduct( belief, MESSAGES(k,i) );
+      if isMax
+	 belief = FactorSum( belief, MESSAGES( k, i ) );
+      else
+	belief = FactorProduct( belief, MESSAGES(k,i) );
+      end
   end
   P.cliqueList(i) = belief;
 end
