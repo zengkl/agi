@@ -36,18 +36,24 @@ MESSAGES = repmat(struct('var', [], 'card', [], 'val', []), N, N);
 % Remember that you only need an upward pass and a downward pass.
 %
  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[i,j] = GetNextCliques(P, MESSAGES)
+[i,j] = GetNextCliques(P, MESSAGES);
+
 while (i  && j )
-  sepset_vars = intersect(P.cliqueList(i).var,P.cliqueList(j).var);
-  marginal_vars = setdiff(P.cliqueList(i).var, sepset_vars);
-  delta = FactorMarginalization(P.cliqueList(i), marginal_vars);
+  delta = P.cliqueList(i);
   for (k = setdiff(find(P.edges(i,:) == 1), [j]))
-    marginal_vars = setdiff(MESSAGES(k,i).var, sepset_vars);
-    delta = FactorProduct(delta,FactorMarginalization(MESSAGES(k,i),marginal_vars));
+    delta = FactorProduct(delta, MESSAGES(k,i) );
   end
+  % Note: Compute the FactorMarginalization AFTER
+  % FactorProduct. I have screwed this up twice now.
+  sepset_vars = intersect(P.cliqueList(i).var, P.cliqueList(j).var);
+  marginal_vars = setdiff( delta.var, sepset_vars );
+  delta = FactorMarginalization( delta, marginal_vars );
   delta.val = delta.val ./ sum(delta.val);
   MESSAGES(i,j) = delta;
-  [i,j] = GetNextCliques(P, MESSAGES)
+  %P.cliqueList(i).var
+  %P.cliqueList(j).var
+  [i,j] = GetNextCliques(P, MESSAGES);
+  
 end
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -56,12 +62,12 @@ end
 % Now the clique tree has been calibrated. 
 % Compute the final potentials for the cliques and place them in P.
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-for (i = 1:length(P.cliqueList))
+for (i = 1:N)
   belief = P.cliqueList(i);
   for (k = find(P.edges(i,:) == 1))
     belief = FactorProduct( belief, MESSAGES(k,i) );
   end
   P.cliqueList(i) = belief;
 end
-
+P.cliqueList = StandardizeFactors(P.cliqueList);
 return
