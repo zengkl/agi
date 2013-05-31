@@ -31,9 +31,12 @@ for (i = 1:length(P.cliqueList))
     for (j = 1:length(P.cliqueList(i).var))
 	v = P.cliqueList(i).var(j);
 	if isempty(M(v).var)
-	   M(v)=FactorMarginalization(P.cliqueList(i),setdiff(P.cliqueList(i).var,v));
-	   M(v).val = M(v).val ./ sum(M(v).val);
+	   if isMax
+	      M(v)=FactorMaxMarginalization(P.cliqueList(i),setdiff(P.cliqueList(i).var,v));
+	   else
+	     M(v)=FactorMarginalization(P.cliqueList(i),setdiff(P.cliqueList(i).var,v));
+	     M(v).val = M(v).val ./ sum(M(v).val);
+	   end
 	end
-    end
-   
+    end   
 end
