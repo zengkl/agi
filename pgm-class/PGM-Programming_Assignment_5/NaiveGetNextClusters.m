@@ -27,7 +27,18 @@ function [i, j] = NaiveGetNextClusters(P, m)
     % The 'find' function may be useful
     %
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
+    N = length(P.clusterList);
+    k = 0;
+    M = mod(m, nnz(P.edges));
+    for j=1:N
+	for (i = find(P.edges(:,j) == 1)')
+	    if (k == M)
+	       return;
+	    else
+		k = k+1;
+	    end
+	end
+    end
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 end

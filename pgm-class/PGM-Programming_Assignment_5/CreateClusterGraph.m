@@ -35,6 +35,26 @@ end;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
+p = 1;
+for (i = 1:length(F))
+    if (length(F(i).var) == 1)
+      %Singleton is a mapping of Singleton variable names to FactorList indices
+       Singleton(F(i).var) = i;
+    else
+      %Pairwise is a mapping of Pairwise clusters to FactorList indices
+      Pairwise(p) = i;
+      p = p+1;
+    end
+end
+P.edges = zeros(length(F), length(F));
+for (p = 1:length(Pairwise))
+    for (s = F(Pairwise(p)).var)
+	P.edges(Pairwise(p), Singleton(s)) = 1;
+	P.edges(Singleton(s), Pairwise(p)) = 1;
+    end
+end
+P.clusterList = F(:)';
+		     
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 

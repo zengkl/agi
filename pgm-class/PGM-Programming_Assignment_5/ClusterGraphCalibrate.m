@@ -45,8 +45,11 @@ for m = 1:length(edgeFromIndx),
     % The matlab/octave functions 'intersect' and 'find' may
     % be useful here (for making your code faster)
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    
+    [sepset_vars, iVar, jVar] =intersect(P.clusterList(i).var,P.clusterList(j).var);
+    delta_ij.var = sepset_vars;
+    delta_ij.card = P.clusterList(i).card(iVar);
+    delta_ij.val = ones(1, prod(delta_ij.card));
+    MESSAGES(i,j) = delta_ij;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 end;
 
@@ -73,8 +76,17 @@ while (1),
     % The function 'setdiff' may be useful to help you
     % obtain some speedup in this function
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-
+    % delta_ij = sum_{C_i - sepset(i,j)} psi_i * prod_{k\in N_i -{j}}
+    % \delta_ki
+    delta_ij = P.clusterList(i);
+    for (k = setdiff(find(P.edges(i,:) == 1), [j]))
+      delta_ij = FactorProduct( delta_ij, MESSAGES(k,i) );
+    end
+    [sepset_vars, iVar, jVar]=intersect(P.clusterList(i).var,P.clusterList(j).var);
+    marginal_vars = setdiff( delta_ij.var, sepset_vars );
+    delta_ij = FactorMarginalization( delta_ij, marginal_vars );
+    delta_ij.val = delta_ij.val ./ sum(delta_ij.val);
+    MESSAGES(i,j) = delta_ij;
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     if(useSmartMP==1)
