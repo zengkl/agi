@@ -87,6 +87,22 @@ while (1),
     delta_ij = FactorMarginalization( delta_ij, marginal_vars );
     delta_ij.val = delta_ij.val ./ sum(delta_ij.val);
     MESSAGES(i,j) = delta_ij;
+    if (i == 19 && j == 3)
+       res_19_3 = MessageDelta( delta_ij, prevMessage )
+       %plot(res_19_3, iteration, '-')
+       %hold all
+    elseif (i == 15 && j == 40)
+       res_15_40 = MessageDelta( delta_ij, prevMessage )
+       %plot(res_15_40, iteration, '--')
+       %hold all
+
+    elseif (i == 17 && j == 2)
+       res_17_2 = MessageDelta( delta_ij, prevMessage )
+       %plot(res_17_2, iteration, ':')
+       %hold all
+    end
+
+
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     
     if(useSmartMP==1)
